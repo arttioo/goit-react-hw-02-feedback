@@ -24,17 +24,18 @@ export class App extends Component {
 
   countPositiveFeedbackPercentage = () => {
     const total = this.countTotalFeedback();
-    return total > 0 ? (100 * this.state.good) / total : 0;
+    return total > 0 ? Math.round((100 * this.state.good) / total) : 0;
   };
   isStatisticsShown = () =>
     Object.keys(this.state).some(key => this.state[key] > 0);
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={{ good, neutral, bad }}
             onLeaveFeedback={this.changeCounter}
           ></FeedbackOptions>
         </Section>
